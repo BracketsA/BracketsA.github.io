@@ -187,7 +187,7 @@
 
             for (const project of projectData) {
                 const projectGroupElement = $("<div/>", {
-                    class: "w-full h-auto bg-white dark:bg-slate-950 rounded-sm border border-blue-800 dark:border-blue-950 shadow-blue-800 dark:shadow-blue-950 shadow-lg hover:dark:shadow-blue-600 hover:shadow-blue-400 transition-shadow duration-500",
+                    class: "w-full h-auto flex flex-col bg-white dark:bg-slate-950 rounded-sm border border-blue-800 dark:border-blue-950 shadow-blue-800 dark:shadow-blue-950 shadow-lg hover:dark:shadow-blue-600 hover:shadow-blue-400 transition-shadow duration-500",
                     id: `project-${project.group}`
                 })
 
@@ -218,7 +218,7 @@
                 }).appendTo(projectGroupElement);
 
                 $("<div/>", {
-                    class: "mb-5 mx-5 text-md text-neutral-600 dark:text-neutral-400 mx-2 font-mono h-auto",
+                    class: "mb-5 mx-5 text-md text-neutral-600 dark:text-neutral-400 mx-2 font-mono h-auto flex-grow",
                     text: project.desc
                 }).appendTo(projectGroupElement);
 
