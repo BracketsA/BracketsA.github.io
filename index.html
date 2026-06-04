@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html class="dark">
+
+<head>
+    <title>BungoChungo - Homepage</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://code.jquery.com/jquery-4.0.0.js"></script>
+</head>
+
+<body class="bg-neutral-50 dark:bg-black max-w-screen">
+    <nav
+        class="w-screen border-b border-blue-800 p-5 fixed left-0 top-0 z-100 shadow-blue-800 shadow-lg bg-neutral-50/80 dark:bg-gray-950/80">
+        <div class="max-w-full flex justify-between items-center">
+            <h1 class="ml-5 text-2xl font-bold text-neutral-950 dark:text-neutral-50 font-sans">BungoChungo</h1>
+            <ul class="flex space-x-8">
+                <li><a class="font-semibold text-neutral-950 dark:text-neutral-50 font-mono" href="#home">Home</a></li>
+                <li><a class="font-semibold text-neutral-950 dark:text-neutral-50 font-mono" href="#skills">Skills</a>
+                </li>
+                <li><a class="font-semibold text-neutral-950 dark:text-neutral-50 font-mono"
+                        href="#projects">Projects</a></li>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <section id="home" class="flex h-screen">
+        <canvas id="header-background" class="w-full h-full absolute">
+
+        </canvas>
+        <div class="w-full content-center pl-10">
+            <h1 class="md:text-9xl text-5xl font-bold mb-5 text-neutral-950 md:w-1/2 w-full dark:text-neutral-50 font-sans">BungoChungo</h1>
+            <h3 class="md:text-4xl text-xl font-semibold mb-10 text-neutral-500 md:w-1/2 w-full dark:text-neutral-400 font-mono">Roblox game,
+                Discord
+                bot,
+                and full stack developer</h3>
+            <p class="md:text-xl text-md font-semibold text-neutral-500 md:w-1/2 w-full dark:text-neutral-400 font-mono">Developer of 6+
+                years currently focussed on creating Roblox games and Discord bots.</h3>
+        </div>
+    </section>
+    <section class="flex flex-col gap-5 p-5 bg-sky-50 dark:bg-gray-950 w-auto">
+        <div class="w-full flex flex-row gap-5 items-center px-5">
+            <div class="dark:text-blue-800 uppercase font-mono">Skills & Experience</div><span
+                class="grow h-px bg-blue-950"></span>
+        </div>
+        <div id="skills" class="flex md:flex-row flex-col gap-10 grow w-full">
+
+        </div>
+    </section>
+    <section class="flex flex-col gap-5 p-5 bg-sky-50 dark:bg-gray-950">
+        <div class="w-full flex flex-row gap-5 items-center px-5">
+            <div class="dark:text-blue-800 uppercase font-mono">Projects</div><span
+                class="grow h-px bg-blue-950"></span>
+        </div>
+        <div id="projects" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10 w-full">
+
+        </div>
+    </section>
+
+    <script>
+        const skillData = [
+            {
+                group: "Languages",
+                skills: [
+                    { name: "Python", years: 6, expert: true },
+                    { name: "JavaScript", years: 6, expert: true },
+                    { name: "C++", years: 2, expert: false },
+                    { name: "Java", years: 2, expert: false },
+                    { name: "Typescript", years: 2, expert: false },
+                ]
+            },
+            {
+                group: "Fields",
+                skills: [
+                    { name: "Roblox Development", years: 6, expert: true },
+                    { name: "Discord Bot Development", years: 6, expert: true },
+                    { name: "Full Stack Development", years: 4, expert: true },
+                    { name: "API Design", years: 3, expert: false },
+                ]
+            },
+            {
+                group: "Databases",
+                skills: [
+                    { name: "MongoDB", years: 6, expert: true },
+                    { name: "SQL", years: 4, expert: false },
+                ]
+            }
+        ];
+
+        const projectData = [
+            {
+                date: "2/20/2026-Present",
+                name: "Pinewood Archive Bot",
+                image: "/assets/pbarchive.png",
+                desc: "A bot created to allow the history of the Roblox group Pinewood Builders to be more accesible by backtracking important group events and user promotions. The bot included features such as a daily \"On this day\" announcement and an open API.",
+                tags: ["Public", "Closed-Source", "API", "Roblox", "Discord Bot", "MongoDB"],
+                link: "https://www.roblox.com/communities/159511/Pinewood-Builders",
+                linkLabel: "View Pinewood Builders on Roblox"
+            },
+            {
+                date: "8/26/2025-Present",
+                name: "Google Docs Spotify Client",
+                image: "/assets/googledocsspotify.png",
+                desc: "A project dedicated to bypassing school restrictions by utilizing services provided only by google. This involved embedding an HTML file within a Google Document that would display upon opening and using Google Apps Script to fetch Spotify account information from the API.",
+                tags: ["Personal", "Closed-Source", "Frontend", "Backend"],
+            },
+            {
+                date: "03/15/2024-Present",
+                name: "Cosmic Junkyard",
+                image: "/assets/cosmicjunkyard2.png",
+                desc: "A multi-world Roblox game where users can put together individual parts to create functional contraptions.",
+                tags: ["Public", "Closed-Source", "Roblox"],
+                link: "https://www.roblox.com/games/17647368609/Cosmic-Junkyard",
+                linkLabel: "View on Roblox"
+            },
+            {
+                date: "04/06/2023-03/05/2024",
+                name: "Star Trek: Shipyards / Trekyards",
+                image: "/assets/shipyards.png",
+                desc: "A Star Trek-inspired roblox game that allowed users to pilot ships and engage in PvE.",
+                tags: ["Closed", "Closed-Source", "Roblox"],
+            }
+        ];
+
+        function loadSkills() {
+            $("#skills").empty();
+
+            for (const skillGroup of skillData) {
+                const skillGroupElement = $("<div/>", {
+                    class: "flex-auto h-auto bg-white dark:bg-slate-950 rounded-sm p-5 border border-blue-800 dark:border-blue-950 shadow-blue-800 dark:shadow-blue-950 shadow-lg",
+                    id: `skill-${skillGroup.group}`
+                })
+
+                $("<div/>", {
+                    class: "text-lg font-bold text-neutral-950 dark:text-neutral-50 mx-2 font-sans",
+                    text: skillGroup.group
+                }).appendTo(skillGroupElement);
+
+                $("<hr>", {
+                    class: "border-blue-900 my-2"
+                }).appendTo(skillGroupElement);
+
+                const skillList = $("<ul/>", {
+                    class: "mx-2 mt-3",
+                    id: `skills-${skillGroup.group}`
+                }).appendTo(skillGroupElement);
+
+                for (const skill of skillGroup.skills) {
+                    const skillItem = $("<li/>", {
+                        class: "text-md border-b border-gray-800 py-2 text-neutral-700 dark:text-neutral-300 flex justify-between items-center"
+                    })
+
+                    const skillName = $("<div/>", {
+                        class: "items-center font-mono",
+                        text: skill.name
+                    })
+
+                    if (skill.expert) {
+                        $("<span/>", {
+                            class: "ml-5 px-2 text-xs text-yellow-100 bg-neutral-800 border border-yellow-200 shadow-md shadow-yellow-200 uppercase",
+                            text: "EXPERT"
+                        }).appendTo(skillName)
+                    }
+
+                    skillName.appendTo(skillItem)
+
+                    $("<div/>", {
+                        class: "text-blue-800 font-mono text-right",
+                        text: `${skill.years} yrs`
+                    }).appendTo(skillItem)
+
+                    skillItem.appendTo(skillList)
+                }
+
+                skillGroupElement.appendTo("#skills")
+            }
+        }
+
+        function loadProjects() {
+            $("#projects").empty();
+
+            for (const project of projectData) {
+                const projectGroupElement = $("<div/>", {
+                    class: "w-full h-auto bg-white dark:bg-slate-950 rounded-sm border border-blue-800 dark:border-blue-950 shadow-blue-800 dark:shadow-blue-950 shadow-lg hover:dark:shadow-blue-600 hover:shadow-blue-400 transition-shadow duration-500",
+                    id: `project-${project.group}`
+                })
+
+                $("<img>", {
+                    class: "width-full aspect-video rounded-sm shadow-md shadow-blue-800 dark:shadow-blue-900 object-cover",
+                    src: project.image
+                }).appendTo(projectGroupElement);
+
+                const projectTags = $("<div/>", {
+                    class: "max-w-full mt-5 mx-5 mb-2 text-xl font-bold text-neutral-950 dark:text-neutral-50 mx-2 font-sans flex gap-x-2 gap-y-1 flex-wrap"
+                }).appendTo(projectGroupElement);
+
+                for (const tag of project.tags) {
+                    $("<div/>", {
+                        class: "rounded-sm text-sm font-normal text-neutral-950 dark:text-neutral-50 font-mono w-auto bg-gray-300 dark:bg-gray-800 p-1 border border-gray-700",
+                        text: tag
+                    }).appendTo(projectTags);
+                }
+
+                $("<div/>", {
+                    class: "mt-2 mx-5 mb-2 text-xl font-bold text-neutral-950 dark:text-neutral-50 mx-2 font-sans",
+                    text: project.name
+                }).appendTo(projectGroupElement);
+
+                $("<div/>", {
+                    class: "mb-4 mx-5 text-sm text-blue-900 uppercase mx-2 font-mono",
+                    text: project.date
+                }).appendTo(projectGroupElement);
+
+                $("<div/>", {
+                    class: "mb-5 mx-5 text-md text-neutral-600 dark:text-neutral-400 mx-2 font-mono",
+                    text: project.desc
+                }).appendTo(projectGroupElement);
+
+                projectGroupElement.appendTo("#projects")
+            }
+        }
+
+        loadSkills();
+        loadProjects();
+    </script>
+</body>
+
+</html>
